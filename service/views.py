@@ -30,6 +30,10 @@ class DishListView(generic.ListView):
     model = Dish
     paginate_by = 5
     template_name = 'service/dish_list.html'
-    queryset = Dish.objects.select_related('dish_type')
+    queryset = Dish.objects.select_related('dish_type').prefetch_related("ingredients")
     context_object_name = 'dish_list'
+
+
+class DishDetailView(generic.DetailView):
+    model = Dish
 
