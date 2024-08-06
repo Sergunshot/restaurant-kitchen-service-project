@@ -26,7 +26,10 @@ class DishTypesListView(generic.ListView):
     context_object_name = 'dish_types_list'
 
 
-class DishTypeDetailView(generic.DetailView):
-    model = DishType
-
+class DishListView(generic.ListView):
+    model = Dish
+    paginate_by = 5
+    template_name = 'service/dish_list.html'
+    queryset = Dish.objects.select_related('dish_type')
+    context_object_name = 'dish_list'
 
