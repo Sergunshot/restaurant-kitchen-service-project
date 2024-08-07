@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Dishes which can prepare that cook:</h1>
+  <ul>
+    {% for dish in cook.dishes.all %}
+      <li><strong>{{ dish.name }}</strong> ({{ dish.dish_type }})</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
