@@ -2,11 +2,11 @@
 
 {% block content %}
   <h1>Dish detail</h1>
-  <p><strong>Dish type: </strong>{{ dish.dish_type.name }}</p>
   <p>
     <strong>
       Ingredients:
-    </strong></p>
+    </strong>
+  </p>
   <ul>
     {% for dish in dish.ingredients.all %}
       <li>{{ dish.name }}</li>
