@@ -40,6 +40,19 @@ class DishTypeCreateView(LoginRequiredMixin, generic.edit.CreateView):
     template_name = "service/dish_type_form.html"
 
 
+class DishTypeUpdateView(LoginRequiredMixin, generic.edit.UpdateView):
+    model = DishType
+    success_url = reverse_lazy("service:dish-types-list")
+    fields = "__all__"
+    template_name = "service/dish_type_form.html"
+
+
+class DishTypeDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
+    model = DishType
+    success_url = reverse_lazy("service:dish-types-list")
+    template_name = "service/dish_type_confirm_delete.html"
+
+
 class DishListView(LoginRequiredMixin, generic.ListView):
     model = Dish
     paginate_by = 5
