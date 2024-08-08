@@ -72,6 +72,19 @@ class DishCreateView(LoginRequiredMixin, generic.edit.CreateView):
     template_name = "service/dish_form.html"
 
 
+class DishUpdateView(LoginRequiredMixin, generic.edit.UpdateView):
+    model = Dish
+    success_url = reverse_lazy("service:dish-list")
+    fields = "__all__"
+    template_name = "service/dish_form.html"
+
+
+class DishDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
+    model = Dish
+    success_url = reverse_lazy("service:dish-list")
+    template_name = "service/dish_confirm_delete.html"
+
+
 class CooksListView(LoginRequiredMixin, generic.ListView):
     model = Cook
     paginate_by = 5
@@ -82,5 +95,3 @@ class CooksListView(LoginRequiredMixin, generic.ListView):
 class CookDetailView(LoginRequiredMixin, generic.DetailView):
     model = Cook
     queryset = Cook.objects.prefetch_related("dishes")
-
-
