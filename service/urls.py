@@ -1,7 +1,8 @@
 from django.urls import path
 
 from service.views import index, DishTypesListView, DishListView, DishDetailView, CooksListView, \
-    CookDetailView, DishTypeCreateView, DishTypeUpdateView, DishTypeDeleteView, DishCreateView
+    CookDetailView, DishTypeCreateView, DishTypeUpdateView, DishTypeDeleteView, DishCreateView, DishUpdateView, \
+    DishDeleteView
 
 urlpatterns = [
     path("", index, name="index"),
@@ -12,6 +13,8 @@ urlpatterns = [
     path("dishes/", DishListView.as_view(), name="dish-list"),
     path("dish/<int:pk>/", DishDetailView.as_view(), name="dish-detail"),
     path("dish/create/", DishCreateView.as_view(), name="dish-create"),
+    path("dish/<int:pk>/update/", DishUpdateView.as_view(), name="dish-update"),
+    path("dish/<int:pk>/delete/", DishDeleteView.as_view(), name="dish-delete"),
     path("cooks/", CooksListView.as_view(), name="cooks-list"),
     path("cooks/<int:pk>/", CookDetailView.as_view(), name="cooks-detail"),
 ]
