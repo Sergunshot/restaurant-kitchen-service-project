@@ -1,12 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Dish types list</h1>
+  <h1>Dish types list <a href="{% url "service:dish-type-create" %}" style="float:right">+</a></h1>
   {% if dish_types_list %}
-    <ul>
+    <table class="table">
+      <tr>
+        <th>Type of dish</th>
+        <th>Update dish type</th>
+        <th>Delete dish type</th>
+      </tr>
       {% for dish_type in dish_types_list %}
-        <li>{{dish_type.name}}</li>
+        <tr>
+          <td>{{ dish_type.name }}</td>
+          <td><a href="{% url "service:dish-type-update" pk=dish_type.id %}">Update</a></td>
+          <td><a href="{% url "service:dish-type-delete" pk=dish_type.id %}">Delete</a></td>
+        </tr>
       {% endfor %}
-    </ul>
+    </table>
   {% endif %}
 {% endblock %}
