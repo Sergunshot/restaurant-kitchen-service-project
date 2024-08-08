@@ -1,14 +1,24 @@
 <ul class="sidebar-nav">
+  {% if user.is_authenticated %}
+    <li>User: <strong>{{ user.username }}</strong></li>
+    <form action="{% url 'logout' %}" method="post">
+      {% csrf_token %}
+      <button type="submit">Logout</button>
+    </form>
+  {% else %}
+    <li><a href="{% url "login" %}">Login</a></li>
+  {% endif %}
+  <br>
   <li>
-    <a href="{% url 'service:index' %}">Home page</a>
+    <a href="{% url "service:index" %}">Home page</a>
   </li>
   <li>
-    <a href="#">All dish types</a>
+    <a href="{% url "service:dish-types-list" %}">All dish types</a>
   </li>
   <li>
-    <a href="#">All dishes</a>
+    <a href="{% url "service:dish-list" %}">All dishes</a>
   </li>
   <li>
-    <a href="#">All cooks</a>
+    <a href="{% url "service:cooks-list" %}">All cooks</a>
   </li>
 </ul>
