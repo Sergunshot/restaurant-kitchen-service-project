@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse
 
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views import generic
 
 from service.models import Cook, DishType, Dish
@@ -32,6 +33,13 @@ class DishTypesListView(LoginRequiredMixin, generic.ListView):
     context_object_name = "dish_types_list"
 
 
+class DishTypeCreateView(LoginRequiredMixin, generic.edit.CreateView):
+    model = DishType
+    success_url = reverse_lazy("service:dish-types-list")
+    fields = "__all__"
+    template_name = "service/dish_type_form.html"
+
+
 class DishListView(LoginRequiredMixin, generic.ListView):
     model = Dish
     paginate_by = 5
@@ -54,3 +62,5 @@ class CooksListView(LoginRequiredMixin, generic.ListView):
 class CookDetailView(LoginRequiredMixin, generic.DetailView):
     model = Cook
     queryset = Cook.objects.prefetch_related("dishes")
+
+
