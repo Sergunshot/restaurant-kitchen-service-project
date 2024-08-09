@@ -110,3 +110,16 @@ class IngredientCreateView(LoginRequiredMixin, generic.CreateView):
     success_url = reverse_lazy("service:ingredient-list")
     fields = "__all__"
     template_name = "service/ingredient_form.html"
+
+
+class IngredientUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Ingredient
+    success_url = reverse_lazy("service:ingredient-list")
+    fields = "__all__"
+    template_name = "service/ingredient_form.html"
+
+
+class IngredientDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
+    model = Ingredient
+    success_url = reverse_lazy("service:ingredient-list")
+    template_name = "service/ingredient_confirm_delete.html"
