@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
+from service.forms import CookForm
 from service.models import Cook, DishType, Dish, Ingredient
 
 
@@ -97,6 +98,12 @@ class CookListView(LoginRequiredMixin, generic.ListView):
 class CookDetailView(LoginRequiredMixin, generic.DetailView):
     model = Cook
     queryset = Cook.objects.prefetch_related("dishes")
+
+
+class CookCreateView(LoginRequiredMixin, generic.CreateView):
+    form_class = CookForm
+    success_url = reverse_lazy("service:cook-list")
+    template_name = "service/cook_form.html"
 
 
 class IngredientListView(LoginRequiredMixin, generic.ListView):
