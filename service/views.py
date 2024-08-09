@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from service.forms import CookForm
+from service.forms import CookForm, DishForm, DishSearchForm
 from service.models import Cook, DishType, Dish, Ingredient
 
 
@@ -63,22 +63,36 @@ class DishListView(LoginRequiredMixin, generic.ListView):
     queryset = Dish.objects.select_related('dish_type').prefetch_related("ingredients")
     context_object_name = "dish_list"
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(DishListView, self).get_context_data(**kwargs)
+        name = self.request.GET.get("name", "")
+        context["search_form"] = DishSearchForm(
+            initial={"name": name}
+        )
+        return context
+
+    def get_queryset(self):
+        queryset = Dish.objects.select_related('dish_type').prefetch_related("ingredients")
+        form = DishSearchForm(self.request.GET)
+        if form.is_valid():
+            return queryset.filter(name__icontains=form.cleaned_data["name"])
+        return queryset
+
 
 class DishDetailView(LoginRequiredMixin, generic.DetailView):
     model = Dish
 
 
 class DishCreateView(LoginRequiredMixin, generic.edit.CreateView):
-    model = Dish
+    form_class = DishForm
     success_url = reverse_lazy("service:dish-list")
-    fields = "__all__"
     template_name = "service/dish_form.html"
 
 
 class DishUpdateView(LoginRequiredMixin, generic.edit.UpdateView):
-    model = Dish
+    form_class = DishForm
+    queryset = Dish.objects.all()
     success_url = reverse_lazy("service:dish-list")
-    fields = "__all__"
     template_name = "service/dish_form.html"
 
 
