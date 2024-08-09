@@ -103,3 +103,10 @@ class IngredientListView(LoginRequiredMixin, generic.ListView):
     model = Ingredient
     paginate_by = 10
     template_name = "service/ingredient_list.html"
+
+
+class IngredientCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Ingredient
+    success_url = reverse_lazy("service:ingredient-list")
+    fields = "__all__"
+    template_name = "service/ingredient_form.html"
