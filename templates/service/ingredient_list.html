@@ -1,19 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Ingredient list</h1>
+  <h1>Ingredient list<a href="{% url "service:ingredient-create" %}" style="float: right">+</a></h1>
   {% if ingredient_list %}
     <table class="table">
       <tr>
         <th>ID</th>
         <th>Ingredient name</th>
+        <th>Update ingredient</th>
         <th>Delete ingredient</th>
       </tr>
       {% for ingredient in ingredient_list %}
         <tr>
           <td>{{ ingredient.id }}</td>
           <td>{{ ingredient.name }}</td>
-          <td>Delete</td>
+          <td><a href="{% url "service:ingredient-update" pk=ingredient.id %}">Update</a></td>
+          <td><a href="{% url "service:ingredient-delete" pk=ingredient.id %}">Delete</a></td>
         </tr>
       {% endfor %}
     </table>
