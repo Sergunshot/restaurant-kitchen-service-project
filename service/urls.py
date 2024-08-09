@@ -1,12 +1,12 @@
 from django.urls import path
 
-from service.views import index, DishTypesListView, DishListView, DishDetailView, CooksListView, \
+from service.views import index, DishListView, DishDetailView, \
     CookDetailView, DishTypeCreateView, DishTypeUpdateView, DishTypeDeleteView, DishCreateView, DishUpdateView, \
-    DishDeleteView
+    DishDeleteView, DishTypeListView, CookListView, IngredientListView
 
 urlpatterns = [
     path("", index, name="index"),
-    path("dish_types/", DishTypesListView.as_view(), name="dish-types-list"),
+    path("dish_types/", DishTypeListView.as_view(), name="dish-type-list"),
     path("dish_type/create/", DishTypeCreateView.as_view(), name="dish-type-create"),
     path("dish_type/<int:pk>/update/", DishTypeUpdateView.as_view(), name="dish-type-update"),
     path("dish_type/<int:pk>/delete/", DishTypeDeleteView.as_view(), name="dish-type-delete"),
@@ -15,8 +15,9 @@ urlpatterns = [
     path("dish/create/", DishCreateView.as_view(), name="dish-create"),
     path("dish/<int:pk>/update/", DishUpdateView.as_view(), name="dish-update"),
     path("dish/<int:pk>/delete/", DishDeleteView.as_view(), name="dish-delete"),
-    path("cooks/", CooksListView.as_view(), name="cooks-list"),
+    path("cooks/", CookListView.as_view(), name="cook-list"),
     path("cooks/<int:pk>/", CookDetailView.as_view(), name="cooks-detail"),
+    path ("ingredients/", IngredientListView.as_view(), name="ingredient-list"),
 ]
 
 app_name = "service"
