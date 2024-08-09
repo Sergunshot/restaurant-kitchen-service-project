@@ -11,6 +11,15 @@ class CookForm(UserCreationForm):
                                                  "years_of_experience", )
 
 
+class CookSearchForm(forms.Form):
+    username = forms.CharField(
+        max_length=100,
+        required=False,
+        label="",
+        widget=forms.TextInput(attrs={"placeholder": "Search by username"})
+    )
+
+
 class DishForm(forms.ModelForm):
     ingredients = forms.ModelMultipleChoiceField(
         queryset=Ingredient.objects.all(),
