@@ -6,7 +6,11 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from service.forms import CookForm, DishForm, DishSearchForm, IngredientSearchForm, CookSearchForm
+from service.forms import (DishForm,
+                           DishSearchForm,
+                           IngredientSearchForm,
+                           CookSearchForm,
+                           CookYearsOfExperienceUpdateForm, CookCreationForm)
 from service.models import Cook, DishType, Dish, Ingredient
 
 
@@ -60,7 +64,8 @@ class DishListView(LoginRequiredMixin, generic.ListView):
     model = Dish
     paginate_by = 7
     template_name = "service/dish_list.html"
-    queryset = Dish.objects.select_related('dish_type').prefetch_related("ingredients")
+    queryset = Dish.objects.select_related(
+        "dish_type").prefetch_related("ingredients")
     context_object_name = "dish_list"
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -72,7 +77,8 @@ class DishListView(LoginRequiredMixin, generic.ListView):
         return context
 
     def get_queryset(self):
-        queryset = Dish.objects.select_related('dish_type').prefetch_related("ingredients")
+        queryset = Dish.objects.select_related(
+            "dish_type").prefetch_related("ingredients")
         form = DishSearchForm(self.request.GET)
         if form.is_valid():
             return queryset.filter(name__icontains=form.cleaned_data["name"])
@@ -120,7 +126,9 @@ class CookListView(LoginRequiredMixin, generic.ListView):
         queryset = Cook.objects.all()
         form = CookSearchForm(self.request.GET)
         if form.is_valid():
-            return queryset.filter(username__icontains=form.cleaned_data["username"])
+            return queryset.filter(
+                username__icontains=form.cleaned_data["username"]
+            )
         return queryset
 
 
@@ -130,9 +138,24 @@ class CookDetailView(LoginRequiredMixin, generic.DetailView):
 
 
 class CookCreateView(LoginRequiredMixin, generic.CreateView):
-    form_class = CookForm
+    form_class = CookCreationForm
     success_url = reverse_lazy("service:cook-list")
     template_name = "service/cook_form.html"
+
+
+class CookDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
+    model = Cook
+    success_url = reverse_lazy("service:cook-list")
+    template_name = "service/cook_confirm_delete.html"
+
+
+class CookYearsOfExperienceUpdateView(
+    LoginRequiredMixin,
+    generic.edit.UpdateView
+):
+    model = Cook
+    form_class = CookYearsOfExperienceUpdateForm
+    success_url = reverse_lazy("service:cook-list")
 
 
 class IngredientListView(LoginRequiredMixin, generic.ListView):

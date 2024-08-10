@@ -3,7 +3,7 @@ from django import forms
 from service.models import Cook, Dish, Ingredient
 
 
-class CookForm(UserCreationForm):
+class CookCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = Cook
         fields = UserCreationForm.Meta.fields + ("first_name",
@@ -18,6 +18,12 @@ class CookSearchForm(forms.Form):
         label="",
         widget=forms.TextInput(attrs={"placeholder": "Search by username"})
     )
+
+
+class CookYearsOfExperienceUpdateForm(forms.Form):
+    class Meta:
+        model = Cook
+        fields = ("years_of_experience", )
 
 
 class DishForm(forms.ModelForm):
