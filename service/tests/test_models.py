@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 
 from service.models import DishType, Cook, Ingredient, Dish
@@ -30,11 +31,11 @@ class ModelsTests(TestCase):
         username = "Test"
         password = "<PASSWORD>"
         years_of_experience = 20
-        cook = Cook.objects.create(
+        cook = get_user_model().objects.create_user(
             username=username,
             password=password,
             years_of_experience=years_of_experience
         )
         self.assertEqual(cook.username, username)
-        self.assertEqual(cook.password, password)
+        self.assertTrue(cook.check_password(password))
         self.assertEqual(cook.years_of_experience, years_of_experience)
