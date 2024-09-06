@@ -2,8 +2,12 @@ from django.test import TestCase
 
 from django.urls import reverse
 
-from service.models import (DishType,
-                            Cook, Dish, Ingredient)
+from service.models import (
+    DishType,
+    Cook,
+    Dish,
+    Ingredient
+)
 
 DISH_TYPE_VIEW_LIST_URL = reverse("service:dish-type-list")
 DISH_TYPE_CREATE_VIEW_URL = reverse("service:dish-type-create")
