@@ -1,12 +1,26 @@
 from django.urls import path
 
-from service.views import (index, DishListView, DishDetailView,
-                           CookDetailView, DishTypeCreateView, DishTypeUpdateView,
-                           DishTypeDeleteView, DishCreateView, DishUpdateView,
-                           DishDeleteView, DishTypeListView, CookListView,
-                           IngredientListView, IngredientCreateView, IngredientUpdateView,
-                           IngredientDeleteView, CookCreateView, CookDeleteView,
-                           CookYearsOfExperienceUpdateView)
+from service.views import (
+    index,
+    DishListView,
+    DishDetailView,
+    CookDetailView,
+    DishTypeCreateView,
+    DishTypeUpdateView,
+    DishTypeDeleteView,
+    DishCreateView,
+    DishUpdateView,
+    DishDeleteView,
+    DishTypeListView,
+    CookListView,
+    IngredientListView,
+    IngredientCreateView,
+    IngredientUpdateView,
+    IngredientDeleteView,
+    CookCreateView,
+    CookDeleteView,
+    CookYearsOfExperienceUpdateView
+)
 
 
 class CookYearsOfExperienceUpdate:
@@ -45,7 +59,11 @@ urlpatterns = [
          name="cook-years-of-experience-update"
          ),
     path("ingredients/", IngredientListView.as_view(), name="ingredient-list"),
-    path("ingredient/create/", IngredientCreateView.as_view(), name="ingredient-create"),
+    path(
+        "ingredient/create/",
+        IngredientCreateView.as_view(),
+        name="ingredient-create"
+    ),
     path("ingredient/<int:pk>/update/",
          IngredientUpdateView.as_view(),
          name="ingredient-update"),
