@@ -6,11 +6,14 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from service.forms import (DishForm,
-                           DishSearchForm,
-                           IngredientSearchForm,
-                           CookSearchForm,
-                           CookYearsOfExperienceUpdateForm, CookCreationForm)
+from service.forms import (
+    DishForm,
+    DishSearchForm,
+    IngredientSearchForm,
+    CookSearchForm,
+    CookYearsOfExperienceUpdateForm,
+    CookCreationForm
+)
 from service.models import Cook, DishType, Dish, Ingredient
 
 
