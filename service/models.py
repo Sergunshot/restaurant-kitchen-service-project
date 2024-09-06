@@ -45,7 +45,8 @@ class Dish(models.Model):
     ingredients = models.ManyToManyField(
         Ingredient,
         related_name="dishes",
-        blank=True)
+        blank=True
+    )
 
     class Meta:
         ordering = ("dish_type", "name", )
