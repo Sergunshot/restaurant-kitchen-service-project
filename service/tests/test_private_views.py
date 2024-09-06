@@ -174,11 +174,12 @@ class ViewsPrivateTest(TestCase):
             last_name="Dobkin",
             years_of_experience=3
         )
-        Cook.objects.create(username="Sergun",
-                            first_name="Sergiy",
-                            last_name="Yurov",
-                            years_of_experience=5
-                            )
+        Cook.objects.create(
+            username="Sergun",
+            first_name="Sergiy",
+            last_name="Yurov",
+            years_of_experience=5
+        )
         response = self.client.get(COOK_VIEW_LIST_URL)
         self.assertEqual(response.status_code, 200)
         list_cooks = Cook.objects.all()
