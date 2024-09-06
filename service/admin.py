@@ -2,10 +2,12 @@ from django.contrib import admin
 
 from django.contrib.auth.admin import UserAdmin
 
-from service.models import (DishType,
-                            Cook,
-                            Ingredient,
-                            Dish)
+from service.models import (
+    DishType,
+    Cook,
+    Ingredient,
+    Dish
+)
 
 
 @admin.register(Dish)
