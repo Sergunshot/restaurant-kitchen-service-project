@@ -1,12 +1,23 @@
 {% extends "base.html" %}
 {% load crispy_forms_filters %}
-
 {% block content %}
-  <h1>Cook list<a href="{% url "service:cook-create" %}" style="float: right">+</a></h1>
-  <form method="get" action="" class="form-inline">
+  <style>
+      body {
+    background-image: url("static/assets/img/re4qfb---c1905x1016x50px50p-up--dff3d3608dabbb324ca4ccc94907a4ba.jpg");
+    background-size: cover;
+}
+    </style>
+  {% load static %}
+  {% block additional_css %}
+    <link rel="stylesheet" href="{% static "assets/css/list.css" %}">
+  {% endblock %}  
+  <h1 class="text-align: center">Cook list<a id="btn_success" class="badge bg-gradient-success" href="{% url "service:cook-create" %}" style="float: right">+</a></h1>
+  <div class="search_form">
+    <form method="get" action="" class="form-inline">
     {{ search_form|crispy }}
-    <input class="btn btn-secondary" type="submit" value="🔍">
+    <input id="button" class="btn btn-outline-info mb-0" type="submit" value="🔍">
   </form>
+  </div>
   {% if cook_list %}
     <table class="table">
       <tr>
@@ -15,14 +26,16 @@
         <th>First name</th>
         <th>Last name</th>
         <th>Years of experience</th>
+        <th>Delete cook</th>
       </tr>
       {% for cook in cook_list %}
         <tr>
           <td>{{ cook.id }}</td>
-          <td><a href="{% url 'service:cooks-detail' pk=cook.id %}">{{ cook.username }}</a></td>
+          <td><a href="{% url 'service:cook-detail' pk=cook.id %}">{{ cook.username }}</a></td>
           <td>{{ cook.first_name }}</td>
           <td>{{ cook.last_name }}</td>
-          <td>{{ cook.years_of_experience }}</td>
+          <td>{{ cook.years_of_experience }}  <a href="{% url "service:cook-years-of-experience-update" pk=cook.id %}"><button type="button" class="btn bg-gradient-success w-auto me-1 mb-0">Update</button></a></td>
+          <td><a href="{% url "service:cook-delete" pk=cook.id %}"><button type="button" class="btn bg-gradient-danger w-auto me-1 mb-0">Delete</button></a></td>
         </tr>
       {% endfor %}
     </table>
