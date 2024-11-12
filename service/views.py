@@ -163,7 +163,7 @@ class CookYearsOfExperienceUpdateView(
 
 class IngredientListView(LoginRequiredMixin, generic.ListView):
     model = Ingredient
-    paginate_by = 10
+    paginate_by = 7
     template_name = "service/ingredient_list.html"
 
     def get_context_data(self, *, object_list=None, **kwargs):
