@@ -4,6 +4,35 @@ from service.models import Cook, Dish, Ingredient
 
 
 class CookCreationForm(UserCreationForm):
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Username",
+                "class": "form-control"
+            }
+        ))
+    email = forms.EmailField(
+        widget=forms.EmailInput(
+            attrs={
+                "placeholder": "Email",
+                "class": "form-control"
+            }
+        ))
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder": "Password",
+                "class": "form-control"
+            }
+        ))
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder": "Password check",
+                "class": "form-control"
+            }
+        ))
+
     class Meta(UserCreationForm.Meta):
         model = Cook
         fields = UserCreationForm.Meta.fields + (
@@ -18,7 +47,7 @@ class CookSearchForm(forms.Form):
         max_length=100,
         required=False,
         label="",
-        widget=forms.TextInput(attrs={"placeholder": "Search by username"})
+        widget=forms.TextInput(attrs={"placeholder": "Search by username", "class": "form-control", "style": "border-bottom-left-radius: 0; border-top-left-radius: 0"})
     )
 
 
@@ -50,7 +79,12 @@ class DishSearchForm(forms.Form):
         max_length=100,
         required=False,
         label="",
-        widget=forms.TextInput(attrs={"placeholder": "Search by name"})
+        widget=forms.TextInput(attrs={
+            "placeholder": "Search by name",
+            "class": "form-control",
+            "style": "border-bottom-left-radius: 0; border-top-left-radius: 0"
+        }
+        )
     )
 
 
@@ -59,5 +93,10 @@ class IngredientSearchForm(forms.Form):
         max_length=100,
         required=False,
         label="",
-        widget=forms.TextInput(attrs={"placeholder": "Search by name"})
+        widget=forms.TextInput(attrs={
+            "placeholder": "Search by name",
+            "class": "form-control",
+            "style": "border-bottom-left-radius: 0; border-top-left-radius: 0"
+        }
+        )
     )
