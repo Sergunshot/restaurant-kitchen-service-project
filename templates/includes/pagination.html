@@ -7,7 +7,7 @@
           <li class="page-item">
             <a class="page-link" href="?{% query_transform request page=page_obj.previous_page_number %}"
                aria-label="Previous">
-              <span aria-hidden="true"><i class="fa fa-angle-double-left" aria-hidden="true"></i></span>
+              <span aria-hidden="true"><i class="fa fa-angle-double-left"></i></span>
             </a>
           </li>
         {% endif %}
@@ -23,9 +23,7 @@
         {% if page_obj.has_next %}
           <li class="page-item">
             <a class="page-link" href="?{% query_transform request page=page_obj.next_page_number %}" aria-label="Next">
-              <span style="font-size: 48px; color: Dodgerblue;">
-                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-              </span>
+              <span aria-hidden="true"><i class="fa fa-angle-double-right"></i></span>
             </a>
           </li>
         {% endif %}
