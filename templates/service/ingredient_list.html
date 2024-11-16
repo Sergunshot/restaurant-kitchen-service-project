@@ -2,27 +2,70 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
-  <h1>Ingredient list<a href="{% url "service:ingredient-create" %}" style="float: right">+</a></h1>
-  <form method="get" action="" class="form-inline">
-    {{ search_form|crispy }}
-    <input class="btn btn-secondary" type="submit" value="🔍">
-  </form>
+  <h3 class="text-center">
+    Ingredient list
+    <a href="{% url "service:ingredient-create" %}" style="float: right">
+      <button type="button" class="btn btn-success btn-sm">
+        +
+      </button>
+    </a>
+  </h3>
+  <div class="row text-center py-2 mt-3">
+    <div class="col-4 mx-auto">
+      <form method="get" action="" class="form-inline">
+        <div class="input-group mb-4">
+          <button class="input-group-text"><i class="fas fa-search" aria-hidden="true"></i></button>
+          {{ search_form }}
+        </div>
+      </form>
+    </div>
+  </div>
   {% if ingredient_list %}
-    <table class="table">
-      <tr>
-        <th>ID</th>
-        <th>Ingredient name</th>
-        <th>Update ingredient</th>
-        <th>Delete ingredient</th>
-      </tr>
-      {% for ingredient in ingredient_list %}
-        <tr>
-          <td>{{ ingredient.id }}</td>
-          <td>{{ ingredient.name }}</td>
-          <td><a href="{% url "service:ingredient-update" pk=ingredient.id %}">Update</a></td>
-          <td><a href="{% url "service:ingredient-delete" pk=ingredient.id %}">Delete</a></td>
-        </tr>
-      {% endfor %}
-    </table>
+    <div class="card">
+      <div class="table-responsive">
+        <table class="table align-items-center mb-0 content-center">
+          <thead>
+          <tr>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Ingredient</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Update
+              ingredient
+            </th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Delete
+              ingredient
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          {% for ingredient in ingredient_list %}
+            <tr>
+              <td>
+                <div class="d-flex px-2 py-1">
+                  <div class="d-flex flex-column justify-content-center">
+                    <h6 class="mb-0 text-xs">{{ ingredient.id }}</h6>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <p class="text-xs font-weight-bold mb-0">
+                <h6 class="mb-0 text-xs">{{ ingredient.name }}</h6>
+                </p>
+              </td>
+              <td class="align-middle text-center text-sm">
+                <a href="{% url "service:ingredient-update" pk=ingredient.id %}">
+                  <span class="badge badge-sm badge-success">Update</span>
+                </a>
+              </td>
+              <td class="align-middle text-center text-sm">
+                <a href="{% url "service:ingredient-delete" pk=ingredient.id %}">
+                  <span class="badge bg-gradient-danger">Delete</span>
+                </a>
+              </td>
+            </tr>
+            </tbody>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
   {% endif %}
 {% endblock %}
