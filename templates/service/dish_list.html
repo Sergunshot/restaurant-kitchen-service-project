@@ -2,31 +2,74 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
-  <h1>Dish list <a href="{% url "service:dish-create" %}" style="float: right">+</a></h1>
-  <form method="get" action="" class="form-inline">
-    {{ search_form|crispy }}
-    <input class="btn btn-secondary" type="submit" value="🔍">
-  </form>
+  <h3 class="text-center">
+    Dish list
+    <a href="{% url "service:dish-create" %}" style="float: right">
+      <button type="button" class="btn btn-success btn-sm">
+        +
+      </button>
+    </a>
+  </h3>
+  <div class="row text-center py-2 mt-3">
+    <div class="col-4 mx-auto">
+      <form method="get" action="" class="form-inline">
+        <div class="input-group mb-4">
+          <button class="input-group-text"><i class="fas fa-search" aria-hidden="true"></i></button>
+          {{ search_form }}
+        </div>
+      </form>
+    </div>
+  </div>
   {% if dish_list %}
-    <table class="table">
-      <tr>
-        <th>ID</th>
-        <th>Dish name</th>
-        <th>Dish type</th>
-        <th>Dish price</th>
-        <th>Update dish</th>
-        <th>Delete dish</th>
-      </tr>
-      {% for dish in dish_list %}
-        <tr>
-          <td>{{ dish.id }}</td>
-          <td><a href="{% url "service:dish-detail" pk=dish.id %}">{{ dish.name }}</a></td>
-          <td>{{ dish.dish_type }}</td>
-          <td>{{ dish.price }}</td>
-          <td><a href="{% url "service:dish-update" pk=dish.id %}">Update</a></td>
-          <td><a href="{% url "service:dish-delete" pk=dish.id %}">Delete</a></td>
-        </tr>
-      {% endfor %}
-    </table>
+    <div class="card">
+      <div class="table-responsive">
+        <table class="table align-items-center mb-0 content-center">
+          <thead>
+          <tr>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Dish name</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Dish type</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Dish price</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Update dish</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Delete dish</th>
+          </tr>
+          </thead>
+          <tbody>
+          {% for dish in dish_list %}
+            <tr>
+              <td>
+                <div class="d-flex px-2 py-1">
+                  <div class="d-flex flex-column justify-content-center">
+                    <h6 class="mb-0 text-xs">{{ dish.id }}</h6>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <p class="text-xs font-weight-bold mb-0">
+                  <a href="{% url 'service:dish-detail' pk=dish.id %}">{{ dish.name }}</a>
+                </p>
+              </td>
+              <td class="align-middle text-center">
+                <h6 class="mb-0 text-xs">{{ dish.dish_type }}</h6>
+              </td>
+              <td class="align-middle text-center">
+                <h6 class="mb-0 text-xs">{{ dish.price }}</h6>
+              </td>
+              <td class="align-middle text-center text-sm">
+                <a href="{% url "service:dish-update" pk=dish.id %}">
+                  <span class="badge badge-sm badge-success">Update</span>
+                </a>
+              </td>
+              <td class="align-middle text-center text-sm">
+                <a href="{% url "service:dish-delete" pk=dish.id %}">
+                  <span class="badge bg-gradient-danger">Delete</span>
+                </a>
+              </td>
+            </tr>
+            </tbody>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
   {% endif %}
 {% endblock %}
