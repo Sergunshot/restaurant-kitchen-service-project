@@ -1,21 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Dish detail</h1>
-  <p>
-    <strong>
+  <style>
+      ul {
+          list-style-type: none
+      }
+  </style>
+  <div class="text-center">
+    <h3>Dish detail</h3>
+    <p>
+    <h5>
       Ingredients:
-    </strong>
-  </p>
-  <ul>
-    {% for dish in dish.ingredients.all %}
-      <li>{{ dish.name }}</li>
-    {% endfor %}
-  </ul>
-  <div class="ml-3">
-    <h3>Cooks:</h3>
-    {% for cook in dish.cooks.all %}
-      <p>({{ cook.first_name }} {{ cook.last_name }})</p>
-    {% endfor %}
+    </h5>
+    </p>
+    <ul>
+      {% for dish in dish.ingredients.all %}
+        <li>{{ dish.name }}</li>
+      {% endfor %}
+    </ul>
+    <div class="ml-3">
+      <h5>Cooks:</h5>
+      {% for cook in dish.cooks.all %}
+        <p>{{ cook.first_name }} {{ cook.last_name }}</p>
+      {% endfor %}
+    </div>
   </div>
+
 {% endblock %}
