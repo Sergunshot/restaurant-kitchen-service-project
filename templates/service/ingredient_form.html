@@ -1,11 +1,12 @@
-{% extends "base.html" %}
+ {% extends "base.html" %}
 {% load crispy_forms_filters %}
 
 {% block content %}
-  <h1>Create ingredient</h1>
+  <h3 class="text-center">Create ingredient</h3>
+  <br>
   <form action="" method="post" novalidate>
     {% csrf_token %}
     {{ form|crispy }}
-    <input type="submit" value="Submit">
+    <input class="btn bg-gradient-primary mb-0" type="submit" value="Submit">
   </form>
 {% endblock %}
