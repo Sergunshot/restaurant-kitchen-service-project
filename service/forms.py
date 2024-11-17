@@ -47,11 +47,16 @@ class CookSearchForm(forms.Form):
         max_length=100,
         required=False,
         label="",
-        widget=forms.TextInput(attrs={"placeholder": "Search by username", "class": "form-control", "style": "border-bottom-left-radius: 0; border-top-left-radius: 0"})
+        widget=forms.TextInput(attrs={
+            "placeholder": "Search by username",
+            "class": "form-control",
+            "style": "border-bottom-left-radius: 0; border-top-left-radius: 0"
+        }
+        )
     )
 
 
-class CookYearsOfExperienceUpdateForm(forms.Form):
+class CookYearsOfExperienceUpdateForm(forms.ModelForm):
     class Meta:
         model = Cook
         fields = ("years_of_experience", )
