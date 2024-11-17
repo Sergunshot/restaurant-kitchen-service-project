@@ -1,43 +1,74 @@
 {% extends "base.html" %}
 {% load crispy_forms_filters %}
 {% block content %}
-  <style>
-      body {
-    background-image: url("static/assets/img/re4qfb---c1905x1016x50px50p-up--dff3d3608dabbb324ca4ccc94907a4ba.jpg");
-    background-size: cover;
-}
-    </style>
-  {% load static %}
-  {% block additional_css %}
-    <link rel="stylesheet" href="{% static "assets/css/list.css" %}">
-  {% endblock %}  
-  <h1 class="text-align: center">Cook list<a id="btn_success" class="badge bg-gradient-success" href="{% url "service:cook-create" %}" style="float: right">+</a></h1>
-  <div class="search_form">
-    <form method="get" action="" class="form-inline">
-    {{ search_form|crispy }}
-    <input id="button" class="btn btn-outline-info mb-0" type="submit" value="🔍">
-  </form>
+  <h3 class="text-center">
+    Cook list
+    <a href="{% url "service:cook-create" %}" style="float: right">
+      <button type="button" class="btn btn-success btn-sm">
+        +
+      </button>
+    </a>
+  </h3>
+  <div class="row text-center py-2 mt-3">
+    <div class="col-4 mx-auto">
+      <form method="get" action="" class="form-inline">
+        <div class="input-group mb-4">
+          <button class="input-group-text"><i class="fas fa-search" aria-hidden="true"></i></button>
+          {{ search_form }}
+        </div>
+      </form>
+    </div>
   </div>
   {% if cook_list %}
-    <table class="table">
-      <tr>
-        <th>ID</th>
-        <th>Username</th>
-        <th>First name</th>
-        <th>Last name</th>
-        <th>Years of experience</th>
-        <th>Delete cook</th>
-      </tr>
-      {% for cook in cook_list %}
-        <tr>
-          <td>{{ cook.id }}</td>
-          <td><a href="{% url 'service:cook-detail' pk=cook.id %}">{{ cook.username }}</a></td>
-          <td>{{ cook.first_name }}</td>
-          <td>{{ cook.last_name }}</td>
-          <td>{{ cook.years_of_experience }}  <a href="{% url "service:cook-years-of-experience-update" pk=cook.id %}"><button type="button" class="btn bg-gradient-success w-auto me-1 mb-0">Update</button></a></td>
-          <td><a href="{% url "service:cook-delete" pk=cook.id %}"><button type="button" class="btn bg-gradient-danger w-auto me-1 mb-0">Delete</button></a></td>
-        </tr>
-      {% endfor %}
-    </table>
+    <div class="card">
+      <div class="table-responsive">
+        <table class="table align-items-center mb-0 content-center">
+          <thead>
+          <tr>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cook</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Username (Cook detail)</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Years of
+              experience
+            </th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employed</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Delete Cook</th>
+          </tr>
+          </thead>
+          <tbody>
+          {% for cook in cook_list %}
+            <tr>
+              <td>
+                <div class="d-flex px-2 py-1">
+                  <div class="d-flex flex-column justify-content-center">
+                    <h6 class="mb-0 text-xs">{{ cook.first_name }} {{ cook.last_name }}</h6>
+                    <h6 class="text-secondary text-xs font-weight-bold">{{ cook.email }}</h6>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <p class="text-xs font-weight-bold mb-0">
+                  <a href="{% url 'service:cook-detail' pk=cook.id %}">{{ cook.username }}</a>
+                </p>
+              </td>
+              <td class="align-middle text-center text-sm">
+                <h6 class="mb-0 text-xs">{{ cook.years_of_experience }}</h6>
+                <a href="{% url "service:cook-years-of-experience-update" pk=cook.id %}">
+                  <span class="badge badge-sm badge-success">Update</span>
+                </a>
+              </td>
+              <td class="align-middle text-center">
+                <span class="text-secondary text-xs font-weight-bold">{{ cook.date_joined|date:"d/m/Y" }}</span>
+              </td>
+              <td class="align-middle text-center text-sm">
+                <a href="{% url "service:cook-delete" pk=cook.id %}">
+                  <span class="badge bg-gradient-danger">Delete</span>
+                </a>
+              </td>
+            </tr>
+            </tbody>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
   {% endif %}
 {% endblock %}
