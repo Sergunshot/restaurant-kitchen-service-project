@@ -1,10 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Dishes which can prepare that cook:</h1>
-  <ul>
+  <style>
+      ul {
+          list-style-type: none
+      }
+  </style>
+  <h3 class="text-center">Dishes which can prepare that cook:</h3>
+  <br>
+  <ul class="text-center">
     {% for dish in cook.dishes.all %}
-      <li><strong>{{ dish.name }}</strong> ({{ dish.dish_type }})</li>
+      <li class="text-center"><strong>{{ dish.name }}</strong> ({{ dish.dish_type }})</li>
     {% endfor %}
   </ul>
 {% endblock %}
