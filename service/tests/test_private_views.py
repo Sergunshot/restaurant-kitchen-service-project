@@ -187,7 +187,7 @@ class ViewsPrivateTest(TestCase):
                          list(list_cooks))
         self.assertTemplateUsed(response, "service/cook_list.html")
 
-    def test_driver_create(self):
+    def test_cook_create(self):
         form_data = {
             "username": "valuc",
             "password1": "Test22021994",
@@ -197,7 +197,13 @@ class ViewsPrivateTest(TestCase):
             "years_of_experience": 3,
         }
         self.client.post(COOK_CREATE_VIEW_URL, data=form_data)
-        new_user = get_user_model().objects.get(username=form_data["username"])
+        new_user = get_user_model().objects.create_user(
+            username="valuc",
+            password="Test22021994",
+            first_name="Dmitriy",
+            last_name="Dobkin",
+            years_of_experience=3,
+        )
         response = self.client.get(COOK_CREATE_VIEW_URL)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "service/cook_form.html")
@@ -209,7 +215,7 @@ class ViewsPrivateTest(TestCase):
             form_data["years_of_experience"]
         )
 
-    def test_driver_delete(self):
+    def test_cook_delete(self):
         cook = Cook.objects.create(
             username="Kolin",
             first_name="Dima",
