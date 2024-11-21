@@ -113,7 +113,7 @@ class DishDeleteView(LoginRequiredMixin, generic.edit.DeleteView):
 
 class CookListView(LoginRequiredMixin, generic.ListView):
     model = Cook
-    paginate_by = 7
+    paginate_by = 5
     template_name = "service/cook_list.html"
     context_object_name = "cook_list"
 
