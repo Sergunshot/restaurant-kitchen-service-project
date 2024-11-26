@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1 class="text-center">Do you want to delete that ingredient?</h1>
+  <form action="" method="post">
+    {% csrf_token %}
+    <center><input type="submit" value="Yes, delete" class="btn btn-danger"></center>
+  </form>
+{% endblock %}

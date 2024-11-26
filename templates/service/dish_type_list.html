@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <h3 class="text-center">
+    Dish type list
+    <a href="{% url "service:dish-create" %}" style="float: right">
+      <button type="button" class="btn btn-success btn-sm">
+        +
+      </button>
+    </a>
+  </h3>
+  <br>
+  {% if dish_type_list %}
+    <div class="card">
+      <div class="table-responsive">
+        <table class="table align-items-center mb-0 content-center">
+          <thead>
+          <tr>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
+            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Type of dish</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Update dish type</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Delete dish type</th>
+          </tr>
+          </thead>
+          <tbody>
+          {% for dish_type in dish_type_list %}
+            <tr>
+              <td>
+                <div class="d-flex px-2 py-1">
+                  <div class="d-flex flex-column justify-content-center">
+                    <h6 class="mb-0 text-xs">{{ dish_type.id }}</h6>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <p class="text-xs font-weight-bold mb-0">
+                  <h6 class="mb-0 text-xs">{{ dish_type.name }}</h6>
+                </p>
+              </td>
+              <td class="align-middle text-center text-sm">
+                <a href="{% url "service:dish-type-update" pk=dish_type.id %}">
+                  <span class="badge badge-sm badge-success">Update</span>
+                </a>
+              </td>
+              <td class="align-middle text-center text-sm">
+                <a href="{% url "service:dish-type-delete" pk=dish_type.id %}">
+                  <span class="badge bg-gradient-danger">Delete</span>
+                </a>
+              </td>
+            </tr>
+            </tbody>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
