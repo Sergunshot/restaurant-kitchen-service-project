@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+import restaurant_kitchen_service.settings.base
 from restaurant_kitchen_service import settings
 
 
@@ -39,7 +40,7 @@ class Dish(models.Model):
     price = models.DecimalField(max_digits=5, decimal_places=2)
     dish_type = models.ForeignKey(DishType, on_delete=models.CASCADE)
     cooks = models.ManyToManyField(
-        settings.AUTH_USER_MODEL,
+        restaurant_kitchen_service.settings.base.AUTH_USER_MODEL,
         related_name="dishes"
     )
     ingredients = models.ManyToManyField(
